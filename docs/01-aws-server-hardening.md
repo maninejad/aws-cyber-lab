@@ -33,6 +33,20 @@ The server was configured with:
 
 # Security Controls Implemented
 
+## UFW Firewall Configuration
+
+The Ubuntu firewall was enabled using UFW (Uncomplicated Firewall).
+
+Allowed services:
+
+| Service | Port | Purpose |
+|---|---|---|
+| SSH | 22 | Remote administration |
+| HTTP | 80 | Web traffic |
+| HTTPS | 443 | Secure web traffic |
+
+The firewall provides an additional security layer alongside AWS Security Groups.
+
 ## 1. AWS Security Group Configuration
 
 Inbound traffic was restricted:
@@ -102,3 +116,61 @@ Planned improvements:
 - HTTPS deployment
 - Network security fundamentals
 - Security hardening principles
+---
+
+# Security Controls Implemented
+
+## UFW Firewall
+
+Ubuntu UFW firewall was enabled to provide host-level traffic filtering.
+
+Allowed services:
+
+| Service | Port | Purpose |
+|---|---|---|
+| SSH | 22 | Remote administration |
+| HTTP | 80 | Web traffic |
+| HTTPS | 443 | Secure web traffic |
+
+The UFW configuration works together with AWS Security Groups to provide layered network protection.
+
+---
+
+## Fail2ban Intrusion Prevention
+
+Fail2ban was installed and configured to monitor SSH authentication attempts.
+
+Configuration:
+
+- Jail: sshd
+- Maximum failed attempts: 5
+- Detection window: 10 minutes
+- Ban duration: 1 hour
+
+Fail2ban helps protect the server against automated brute-force login attempts by temporarily blocking suspicious IP addresses.
+
+---
+
+## SSH Hardening
+
+SSH configuration was reviewed and hardened.
+
+Implemented controls:
+
+- Disabled root login
+- Disabled empty password authentication
+- Created SSH configuration backup before changes
+- Validated SSH configuration before restarting service
+
+These changes reduce the risk of unauthorized administrative access.
+
+---
+
+# Security Testing
+
+Completed checks:
+
+- Verified UFW firewall rules
+- Confirmed Fail2ban SSH monitoring
+- Tested SSH service configuration
+- Confirmed HTTPS availability
